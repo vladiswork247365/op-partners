@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070708">
+<title>Проверенные подрядчики — Система ОП</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"></noscript>
+<style>
+:root{--bg:#070708;--red:#E01029;--red-bright:#FF1F3D;--white:#F2F3F5;--muted:#8a8d95;--card:#101015;}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{background:#070708;font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;color:var(--white);min-height:100%;}
+body{position:relative;overflow-x:hidden;}
+
+/* ===== Фон как на сайте экосистемы: красная «туманность» + виньетка ===== */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:#070708;}
+.nebula{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(48% 40% at 2% 0%, rgba(224,16,41,.55), rgba(94,8,19,.22) 30%, transparent 56%),
+    radial-gradient(46% 40% at 99% 100%, rgba(224,16,41,.5), rgba(94,8,19,.2) 32%, transparent 58%),
+    radial-gradient(30% 26% at 96% 4%, rgba(180,12,30,.28), transparent 50%),
+    radial-gradient(34% 32% at 4% 96%, rgba(140,10,24,.3), transparent 56%);
+  animation:breathe 16s ease-in-out infinite;}
+@keyframes breathe{0%,100%{opacity:.72}50%{opacity:1}}
+.vignette{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(80% 80% at 50% 30%, transparent 40%, rgba(0,0,0,.65) 100%);}
+
+/* ===== Шапка ===== */
+.wrap{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:26px 26px 50px;}
+.top{display:flex;flex-direction:column;align-items:center;text-align:center;gap:11px;margin-bottom:26px;}
+.brand{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:12px;letter-spacing:.28em;color:var(--white);opacity:.85;}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 14px 3px var(--red-bright);}
+.brand b{color:var(--red-bright);}
+h1{font-weight:900;font-size:clamp(24px,4.4vw,40px);letter-spacing:.04em;line-height:1.08;
+  background:linear-gradient(180deg,#fff 0%,#c9ccd4 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.sub{max-width:640px;color:var(--muted);font-size:clamp(12px,1.6vw,14px);font-weight:500;line-height:1.6;letter-spacing:.01em;}
+.count{margin-top:2px;font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--red-bright);text-transform:uppercase;}
+
+/* ===== Сетка: 3 в ширину × 2 в высоту ===== */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr);gap:16px;}}
+@media(max-width:600px){.grid{grid-template-columns:1fr;gap:16px;}}
+
+/* ===== Карточка спеца ===== */
+.card{position:relative;border-radius:20px;overflow:hidden;
+  background:linear-gradient(160deg,rgba(28,12,16,.72),rgba(12,8,10,.82));
+  border:1px solid rgba(255,80,100,.14);
+  box-shadow:0 20px 50px rgba(0,0,0,.5), inset 0 1px 0 rgba(255,255,255,.04);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  display:flex;flex-direction:column;
+  transition:transform .3s cubic-bezier(.6,0,.2,1),border-color .3s,box-shadow .3s;}
+.card:hover{transform:translateY(-5px);border-color:rgba(255,80,100,.45);
+  box-shadow:0 28px 64px rgba(224,16,41,.18), 0 20px 50px rgba(0,0,0,.55);}
+
+/* фото — портрет, НЕ на весь экран, аккуратный кроп по лицу */
+.photo{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#16161c;}
+.photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;
+  filter:grayscale(100%) contrast(1.04);transition:filter .4s,transform .5s;display:block;}
+.card:hover .photo img{filter:grayscale(0%) contrast(1.02);transform:scale(1.03);}
+.photo::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,transparent 45%,rgba(8,6,8,.35) 72%,rgba(8,6,8,.95) 100%);}
+.photo .noimg{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:rgba(160,165,175,.35);font-size:38px;font-weight:800;}
+
+/* бейдж «работал с Системой ОП» */
+.verified{position:absolute;top:12px;left:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;
+  padding:6px 11px 6px 8px;border-radius:20px;
+  background:rgba(224,16,41,.16);border:1px solid rgba(255,80,100,.4);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  color:#fff;font-size:8.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.25;text-align:left;}
+.verified svg{width:14px;height:14px;flex-shrink:0;fill:none;stroke:var(--red-bright);stroke-width:2.4;}
+
+/* низ карточки */
+.info{padding:16px 18px 18px;display:flex;flex-direction:column;gap:9px;flex:1;}
+.spec{font-size:15px;font-weight:800;letter-spacing:.02em;color:#fff;text-transform:uppercase;line-height:1.2;}
+.name{font-size:12px;font-weight:600;color:var(--red-bright);letter-spacing:.04em;margin-top:-4px;}
+.desc{font-size:12px;font-weight:500;color:var(--muted);line-height:1.55;flex:1;}
+.wa{margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:12px 16px;border-radius:12px;text-decoration:none;
+  background:linear-gradient(135deg,#25D366,#128C4B);
+  color:#fff;font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.14);box-shadow:0 8px 22px rgba(37,211,102,.22);
+  transition:filter .2s,transform .2s;}
+.wa:hover{filter:brightness(1.12);transform:translateY(-1px);}
+.wa svg{width:18px;height:18px;fill:#fff;flex-shrink:0;}
+.wa .num{font-size:11px;letter-spacing:.02em;opacity:.95;}
+
+/* заглушка «скоро добавим» */
+.card.empty{align-items:center;justify-content:center;min-height:340px;border-style:dashed;
+  border-color:rgba(255,255,255,.08);background:rgba(255,255,255,.015);box-shadow:none;}
+.card.empty:hover{transform:none;border-color:rgba(255,255,255,.14);box-shadow:none;}
+.card.empty span{color:rgba(160,165,175,.4);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+
+.foot{margin-top:44px;text-align:center;color:rgba(160,165,175,.45);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;}
+.foot b{color:var(--red-bright);}
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="nebula"></div><div class="vignette"></div>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="dot"></span>СИСТЕМА <b>ОП</b></div>
+    <h1>ПРОВЕРЕННЫЕ ПОДРЯДЧИКИ</h1>
+    <p class="sub">Специалисты, которые лично работали с командой «Система ОП». Каждого проверили в деле — можно писать напрямую в WhatsApp.</p>
+    <div class="count" id="count"></div>
+  </header>
+
+  <main class="grid" id="grid"></main>
+
+  <div class="foot">ЭКОСИСТЕМА <b>ОП</b> · systemop.top</div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   КАРТОТЕКА СПЕЦИАЛИСТОВ
+   Чтобы добавить нового — скопируй один блок { ... } ниже и заполни:
+     photo — имя файла фото в папке img (например "spec-02.jpg")
+     spec  — специализация ЖИРНЫМ (например "ИНТЕГРАТОР BITRIX24")
+     name  — имя (по желанию, можно оставить "")
+     desc  — короткое описание
+     wa    — номер WhatsApp только цифрами, без + и пробелов ("77075340658")
+   Фото просто положи в папку img рядом.
+   ═══════════════════════════════════════════════════════════════ */
+const SPECIALISTS = [
+  {
+    photo: "spec-01.jpg",
+    spec:  "ИНТЕГРАТОР BITRIX24",
+    name:  "",
+    desc:  "Настройка и внедрение Bitrix24 под отдел продаж: воронки, автоматизация, интеграции. Работал с «Система ОП».",
+    wa:    "77075340658"
+  },
+  // ← сюда добавляй следующих специалистов
+];
+
+// сколько всего мест показываем в картотеке (пустые = «скоро добавим»)
+const SLOTS = 12;
+
+const waIcon = '<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 18.13h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.2.84.85-3.12-.2-.32a8.2 8.2 0 01-1.26-4.36c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 012.41 5.82c0 4.54-3.7 8.49-8.25 8.49zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43-.14-.01-.31-.01-.48-.01-.17 0-.43.06-.66.31-.23.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>';
+const checkIcon = '<svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>';
+
+function fmtPhone(d){ // 77075340658 → +7 707 534 06 58
+  if(d.length===11) return '+'+d[0]+' '+d.slice(1,4)+' '+d.slice(4,7)+' '+d.slice(7,9)+' '+d.slice(9);
+  return '+'+d;
+}
+
+const grid = document.getElementById('grid');
+SPECIALISTS.forEach(s=>{
+  const card = document.createElement('article');
+  card.className = 'card';
+  const photo = s.photo
+    ? '<img src="img/'+s.photo+'" alt="'+s.spec+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="noimg" style="display:none">ФОТО</div>'
+    : '<div class="noimg">ФОТО</div>';
+  card.innerHTML =
+    '<div class="photo">'+
+      '<div class="verified">'+checkIcon+'<span>РАБОТАЛ С<br>«СИСТЕМА ОП»</span></div>'+
+      photo+
+    '</div>'+
+    '<div class="info">'+
+      '<div class="spec">'+s.spec+'</div>'+
+      (s.name ? '<div class="name">'+s.name+'</div>' : '')+
+      '<div class="desc">'+s.desc+'</div>'+
+      '<a class="wa" href="https://wa.me/'+s.wa+'" target="_blank" rel="noopener">'+
+        waIcon+'<span>WhatsApp</span><span class="num">'+fmtPhone(s.wa)+'</span>'+
+      '</a>'+
+    '</div>';
+  grid.appendChild(card);
+});
+
+// пустые места-заглушки, чтобы картотека выглядела заполненной
+for(let i=SPECIALISTS.length;i<SLOTS;i++){
+  const e = document.createElement('article');
+  e.className='card empty';
+  e.innerHTML='<span>Скоро добавим</span>';
+  grid.appendChild(e);
+}
+
+document.getElementById('count').textContent = SPECIALISTS.length===1
+  ? '1 проверенный специалист'
+  : SPECIALISTS.length+' проверенных специалистов';
+</script>
+</body>
+</html>
