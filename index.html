@@ -59,8 +59,8 @@ h1{font-weight:900;font-size:clamp(24px,4.4vw,40px);letter-spacing:.04em;line-he
 /* фото — портрет, НЕ на весь экран, аккуратный кроп по лицу */
 .photo{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#16161c;}
 .photo img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;
-  filter:grayscale(100%) contrast(1.04);transition:filter .4s,transform .5s;display:block;}
-.card:hover .photo img{filter:grayscale(0%) contrast(1.02);transform:scale(1.03);}
+  filter:contrast(1.03) saturate(1.12);transition:filter .4s,transform .5s;display:block;}
+.card:hover .photo img{filter:contrast(1.04) saturate(1.2);transform:scale(1.03);}
 .photo::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(135% 108% at 50% 30%, transparent 40%, rgba(8,6,8,.5) 100%),
