@@ -37,7 +37,28 @@ body{position:relative;overflow-x:hidden;}
 h1{font-weight:900;font-size:clamp(24px,4.4vw,40px);letter-spacing:.04em;line-height:1.08;
   background:linear-gradient(180deg,#fff 0%,#c9ccd4 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
 .sub{max-width:640px;color:var(--muted);font-size:clamp(12px,1.6vw,14px);font-weight:500;line-height:1.6;letter-spacing:.01em;}
-.count{margin-top:2px;font-size:11px;font-weight:700;letter-spacing:.16em;color:var(--red-bright);text-transform:uppercase;}
+.count{margin-top:4px;font-size:10.5px;font-weight:800;letter-spacing:.18em;color:var(--red-bright);text-transform:uppercase;
+  padding:6px 15px;border:1px solid rgba(255,80,100,.32);border-radius:20px;background:rgba(224,16,41,.08);}
+
+/* ===== Верхняя панель: бренд слева + ссылка на экосистему справа ===== */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 0 22px;}
+.tb-brand{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:12px;letter-spacing:.26em;color:var(--white);opacity:.92;text-decoration:none;transition:opacity .2s;}
+.tb-brand:hover{opacity:1;}
+.tb-brand .dot{width:9px;height:9px;border-radius:50%;background:var(--red-bright);box-shadow:0 0 14px 3px var(--red-bright);}
+.tb-brand b{color:var(--red-bright);}
+.eco-link{display:inline-flex;align-items:center;gap:9px;text-decoration:none;padding:9px 15px;border-radius:24px;
+  background:rgba(20,8,12,.5);border:1px solid rgba(255,80,100,.28);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  color:var(--white);font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;
+  transition:border-color .25s,background .25s,transform .2s;}
+.eco-link b{color:var(--red-bright);}
+.eco-link svg{width:14px;height:14px;fill:none;stroke:var(--red-bright);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s;}
+.eco-link:hover{border-color:rgba(255,80,100,.6);background:rgba(40,12,18,.6);transform:translateY(-1px);}
+.eco-link:hover svg{transform:translateX(3px);}
+/* декоративная линия под заголовком */
+.rule{width:130px;height:2px;border-radius:2px;margin:3px 0;
+  background:linear-gradient(90deg,transparent,var(--red) 30%,var(--red-bright),var(--red) 70%,transparent);
+  box-shadow:0 0 12px rgba(224,16,41,.55);}
 
 /* ===== Сетка: 4 в ширину на десктопе ===== */
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;transition:opacity .45s ease;}
@@ -99,24 +120,47 @@ h1{font-weight:900;font-size:clamp(24px,4.4vw,40px);letter-spacing:.04em;line-he
 .card.empty:hover{transform:none;border-color:rgba(255,255,255,.14);box-shadow:none;}
 .card.empty span{color:rgba(160,165,175,.4);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
 
-.foot{margin-top:44px;text-align:center;color:rgba(160,165,175,.45);font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;}
-.foot b{color:var(--red-bright);}
+.foot{margin-top:46px;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;}
+.eco-btn{display:inline-flex;align-items:center;gap:11px;text-decoration:none;padding:15px 30px;border-radius:14px;
+  background:linear-gradient(135deg,#E01029,#8a0a1c);
+  color:#fff;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid rgba(255,120,135,.35);box-shadow:0 12px 32px rgba(224,16,41,.35);
+  transition:filter .2s,transform .2s,box-shadow .2s;}
+.eco-btn:hover{filter:brightness(1.14);transform:translateY(-2px);box-shadow:0 16px 44px rgba(224,16,41,.55);}
+.eco-btn svg{width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s;}
+.eco-btn:hover svg{transform:translateX(4px);}
+.foot-note{color:rgba(160,165,175,.5);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;}
+.foot-note a{color:var(--red-bright);text-decoration:none;}
+.foot-note a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
 <div class="bg"></div><div class="nebula"></div><div class="vignette"></div>
 
 <div class="wrap">
+  <div class="topbar">
+    <a class="tb-brand" href="https://systemop.top/" target="_blank" rel="noopener"><span class="dot"></span>СИСТЕМА <b>ОП</b></a>
+    <a class="eco-link" href="https://systemop.top/" target="_blank" rel="noopener" aria-label="Перейти в Экосистему ОП">
+      <span>ЭКОСИСТЕМА <b>ОП</b></span>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </div>
   <header class="top">
-    <div class="brand"><span class="dot"></span>СИСТЕМА <b>ОП</b></div>
     <h1>СПЕЦИАЛИСТЫ, ПРОВЕРЕННЫЕ ВРЕМЕНЕМ</h1>
+    <div class="rule"></div>
     <p class="sub">Специалисты, которые лично работали с командой «Система ОП». Каждый специалист максимально ответственный — можно писать напрямую в WhatsApp. За каждого указанного здесь профи основатель ассоциации отвечает собственной репутацией.</p>
     <div class="count" id="count"></div>
   </header>
 
   <main class="grid" id="grid"></main>
 
-  <div class="foot">ЭКОСИСТЕМА <b>ОП</b> · systemop.top</div>
+  <footer class="foot">
+    <a class="eco-btn" href="https://systemop.top/" target="_blank" rel="noopener">
+      <span>Перейти в Экосистему ОП</span>
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <div class="foot-note">Экосистема продуктов «Система ОП» · <a href="https://systemop.top/" target="_blank" rel="noopener">systemop.top</a></div>
+  </footer>
 </div>
 
 <script>
